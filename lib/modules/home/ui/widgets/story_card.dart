@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:short_term_assignment/common/models/stories.dart';
@@ -24,21 +23,14 @@ class StoryCard extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: CachedNetworkImage(
-                imageUrl: story.cornerImageUrl,
-                placeholder: (context, url) => new CupertinoActivityIndicator(),
-                errorWidget: (context, url, error) => new Icon(Icons.error),
-              ),
+              child: Image.network(story.cornerImageUrl),
             ),
             Center(
               child: SizedBox(
                   width: 80,
                   height: 80,
-                  child: CachedNetworkImage(
-                    imageUrl: story.iconUrl,
-                    placeholder: (context, url) =>
-                        new CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => new Icon(Icons.error),
+                  child: Image.network(
+                    story.iconUrl,
                   )),
             ),
             Align(

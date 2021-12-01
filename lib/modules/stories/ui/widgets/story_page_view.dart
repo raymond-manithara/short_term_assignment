@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:short_term_assignment/common/models/page.dart';
@@ -25,19 +24,17 @@ class StoryPageView extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Padding(
             padding: EdgeInsets.only(top: 28),
-            child: CachedNetworkImage(
-              imageUrl: storyPage.topImageUrl,
-              placeholder: (context, url) => new CupertinoActivityIndicator(),
-              errorWidget: (context, url, error) => new Icon(Icons.error),
+            child: Image.network(
+              storyPage.topImageUrl,
+              width: MediaQuery.of(context).size.width,
             ),
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: CachedNetworkImage(
-            imageUrl: storyPage.bottomImageUrl,
-            placeholder: (context, url) => new CupertinoActivityIndicator(),
-            errorWidget: (context, url, error) => new Icon(Icons.error),
+          child: Image.network(
+            storyPage.bottomImageUrl,
+            width: MediaQuery.of(context).size.width,
           ),
         ),
         Center(

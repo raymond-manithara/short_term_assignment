@@ -17,7 +17,6 @@ class StoriesProvider with ChangeNotifier {
   /// State variables
   PageController pageController = PageController();
   int activePage = 0;
-  late Timer timer;
   late AnimationController animationController;
   late BuildContext context;
 
@@ -40,20 +39,6 @@ class StoriesProvider with ChangeNotifier {
           Navigator.pop(context);
         }
         notifyListeners();
-      }
-    });
-  }
-
-  initializeTimer() {
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
-      var length = story?.pages.length ?? 0;
-      if (activePage < length) {
-        activePage++;
-        notifyListeners();
-        storyTimeEnd();
-      } else {
-        print('Timer cancelled');
-        timer.cancel();
       }
     });
   }
@@ -101,10 +86,6 @@ class StoriesProvider with ChangeNotifier {
         activePage += 1;
         renderStory(storyPage: story?.pages[activePage]);
       } else {
-        // Out of bounds - loop story
-        // You can also Navigator.of(context).pop() here
-        // activePage = 0;
-        // renderStory(storyPage: story?.pages[activePage]);
         Navigator.of(context, rootNavigator: true).pop();
       }
       print("Tap forward");
