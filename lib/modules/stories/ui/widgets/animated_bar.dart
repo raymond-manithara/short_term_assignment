@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:short_term_assignment/common/theme/color.dart';
 
 class AnimatedBar extends StatelessWidget {
   final AnimationController animController;
@@ -24,7 +25,7 @@ class AnimatedBar extends StatelessWidget {
                 _buildContainer(
                   double.infinity,
                   position < currentIndex
-                      ? Colors.blueAccent
+                      ? HexColor('#8F00FF')
                       : Colors.white.withOpacity(0.5),
                 ),
                 position == currentIndex
@@ -33,7 +34,7 @@ class AnimatedBar extends StatelessWidget {
                         builder: (context, child) {
                           return _buildContainer(
                             constraints.maxWidth * animController.value,
-                            Colors.blueAccent,
+                            HexColor('#8F00FF'),
                           );
                         },
                       )

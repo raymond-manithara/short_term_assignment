@@ -101,4 +101,14 @@ class StoriesProvider with ChangeNotifier {
   setContext(BuildContext _context) {
     context = _context;
   }
+
+  longPressOnStory() {
+    animationController.stop();
+    notifyListeners();
+  }
+
+  longPressOnStoryEnd() {
+    animationController.forward();
+    notifyListeners();
+  }
 }

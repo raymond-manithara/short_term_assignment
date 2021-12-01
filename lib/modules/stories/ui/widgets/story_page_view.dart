@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:short_term_assignment/common/models/page.dart';
 import 'package:short_term_assignment/common/theme/color.dart';
 
@@ -22,12 +23,9 @@ class StoryPageView extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: Padding(
-            padding: EdgeInsets.only(top: 28),
-            child: Image.network(
-              storyPage.topImageUrl,
-              width: MediaQuery.of(context).size.width,
-            ),
+          child: Image.network(
+            storyPage.topImageUrl,
+            width: MediaQuery.of(context).size.width,
           ),
         ),
         Align(
@@ -47,11 +45,13 @@ class StoryPageView extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Text(
                             _text.text,
-                            style: TextStyle(
-                                fontWeight: _text.isBold
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                                fontSize: 18),
+                            style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontWeight: _text.isBold
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    fontSize: 18,
+                                    color: Colors.black87)),
                             textAlign: TextAlign.center,
                           ),
                         ))

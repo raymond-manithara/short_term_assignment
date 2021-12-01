@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:short_term_assignment/common/models/stories.dart';
 import 'package:short_term_assignment/common/theme/color.dart';
 
@@ -15,6 +16,7 @@ class StoryCard extends StatelessWidget {
       },
       child: Container(
         width: 140,
+        margin: EdgeInsets.only(right: 18),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -37,10 +39,10 @@ class StoryCard extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child: Text(
-                  story.name,
-                  textAlign: TextAlign.center,
-                ),
+                child: Text(story.name,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: Colors.black87))),
               ),
             ),
           ],

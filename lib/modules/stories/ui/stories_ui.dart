@@ -29,44 +29,53 @@ class _StoriesUIState extends State<StoriesUI> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     context.read<StoriesProvider>().setContext(context);
-    return Material(
-        child: GestureDetector(
-      onTapDown: (details) =>
-          context.read<StoriesProvider>().onTapDown(context, details),
-      child: Stack(
-        children: [
-          PageView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              controller: context.select(
-                  (StoriesProvider provider) => provider.pageController),
-              itemCount: context
-                      .select(
-                          (StoriesProvider provider) => provider.story?.pages)
-                      ?.length ??
-                  0,
-              itemBuilder: (context, index) => Builder(builder: (context) {
-                    return StoryPageView(
-                        storyPage: context.select((StoriesProvider provider) =>
-                            provider.story?.pages)![index]);
-                  })),
-          Positioned(
-              top: 40.0,
-              left: 10.0,
-              right: 10.0,
-              child: Column(children: <Widget>[
-                Row(
-                    children: _buildAnimationBar(
-                        context.select((StoriesProvider provider) =>
-                                provider.story?.pages) ??
-                            [],
-                        context.select((StoriesProvider provider) =>
-                            provider.animationController),
-                        context.select(
-                            (StoriesProvider provider) => provider.activePage)))
-              ]))
-        ],
-      ),
-    ));
+    return SafeArea(
+      child: Material(
+          child: GestureDetector(
+        onLongPress: () {
+          context.read<StoriesProvider>().longPressOnStory();
+        },
+        onLongPressEnd: (LongPressEndDetails endDetails) {
+          context.read<StoriesProvider>().longPressOnStoryEnd();
+        },
+        onTapDown: (details) =>
+            context.read<StoriesProvider>().onTapDown(context, details),
+        child: Stack(
+          children: [
+            PageView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                controller: context.select(
+                    (StoriesProvider provider) => provider.pageController),
+                itemCount: context
+                        .select(
+                            (StoriesProvider provider) => provider.story?.pages)
+                        ?.length ??
+                    0,
+                itemBuilder: (context, index) => Builder(builder: (context) {
+                      return StoryPageView(
+                          storyPage: context.select(
+                              (StoriesProvider provider) =>
+                                  provider.story?.pages)![index]);
+                    })),
+            Positioned(
+                top: 20.0,
+                left: 10.0,
+                right: 10.0,
+                child: Column(children: <Widget>[
+                  Row(
+                      children: _buildAnimationBar(
+                          context.select((StoriesProvider provider) =>
+                                  provider.story?.pages) ??
+                              [],
+                          context.select((StoriesProvider provider) =>
+                              provider.animationController),
+                          context.select((StoriesProvider provider) =>
+                              provider.activePage)))
+                ]))
+          ],
+        ),
+      )),
+    );
   }
 
   List<Widget> _buildAnimationBar(List<StoryPage> pages,
