@@ -1,4 +1,4 @@
-package com.example.short_term_assignment
+package com.rstream.crafts
 
 import io.flutter.embedding.android.FlutterActivity
 
