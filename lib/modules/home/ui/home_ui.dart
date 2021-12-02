@@ -30,14 +30,21 @@ class _HomeUIState extends State<HomeUI> {
         child: context.select((HomeProvider provider) => provider.isLoading)
             ? Column(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 100, bottom: 200),
+                      child: Text('Craft Stories',
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 30))),
+                    ),
                     CupertinoActivityIndicator(),
                     SizedBox(
                       height: 20,
                     ),
-                    Text('Loading content please wait...')
+                    Text('Loading Stories, Please wait...',
+                        style: GoogleFonts.roboto())
                   ])
             : Center(
                 child: Column(

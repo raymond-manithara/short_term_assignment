@@ -45,7 +45,7 @@ class StoryPageView extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Text(
                             _text.text,
-                            style: GoogleFonts.lato(
+                            style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
                                     fontWeight: _text.isBold
                                         ? FontWeight.bold

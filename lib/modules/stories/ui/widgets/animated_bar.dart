@@ -49,7 +49,7 @@ class AnimatedBar extends StatelessWidget {
 
   Container _buildContainer(double width, Color color) {
     return Container(
-      height: 5.0,
+      height: 3.0,
       width: width,
       decoration: BoxDecoration(
         color: color,

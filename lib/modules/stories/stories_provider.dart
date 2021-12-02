@@ -53,21 +53,26 @@ class StoriesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void renderStory({StoryPage? storyPage, bool forwardPage = true}) {
+  void renderStory(
+      {StoryPage? storyPage, bool forwardPage = true, isSlide = false}) {
     animationController.stop();
     animationController.reset();
     int storyStringLength = 0;
     storyPage?.texts.forEach((element) {
       storyStringLength += element.text.length;
     });
-    int durationMilliSeconds = storyStringLength * 50;
+    int durationMilliSeconds = storyStringLength * 20;
     Duration storyDuration = Duration(milliseconds: durationMilliSeconds);
     animationController.duration = storyDuration;
     animationController.forward();
+    Duration animationDuration = Duration(milliseconds: 500);
+    if (isSlide) {
+      animationDuration = Duration(seconds: 1);
+    }
     print("next page");
     if (forwardPage) {
       pageController.animateToPage(activePage,
-          duration: const Duration(seconds: 1), curve: Curves.easeIn);
+          duration: animationDuration, curve: Curves.easeIn);
     }
   }
 
@@ -77,14 +82,14 @@ class StoriesProvider with ChangeNotifier {
     if (dx < screenWidth / 3) {
       if (activePage - 1 >= 0) {
         activePage -= 1;
-        renderStory(storyPage: story?.pages[activePage]);
+        renderStory(storyPage: story?.pages[activePage], isSlide: true);
       }
       print("Tap backward");
     } else if (dx > 2 * screenWidth / 3) {
       var length = story?.pages.length ?? 0;
       if (activePage + 1 < length) {
         activePage += 1;
-        renderStory(storyPage: story?.pages[activePage]);
+        renderStory(storyPage: story?.pages[activePage], isSlide: true);
       } else {
         Navigator.of(context, rootNavigator: true).pop();
       }
