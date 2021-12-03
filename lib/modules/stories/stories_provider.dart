@@ -50,6 +50,7 @@ class StoriesProvider with ChangeNotifier {
       duration: Duration(milliseconds: 350),
       curve: Curves.easeIn,
     );
+
     notifyListeners();
   }
 
