@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:short_term_assignment/common/models/page.dart';
 import 'package:short_term_assignment/common/models/stories.dart';
+import 'package:short_term_assignment/common/theme/color.dart';
 
 class StoriesProvider with ChangeNotifier {
   /// Arguments from previous page
@@ -19,6 +21,7 @@ class StoriesProvider with ChangeNotifier {
   int activePage = 0;
   late AnimationController animationController;
   late BuildContext context;
+  Color statusBarColor = Colors.white;
 
   /// Methods
   initializeAnimation(TickerProvider ticker) {
@@ -58,6 +61,7 @@ class StoriesProvider with ChangeNotifier {
       {StoryPage? storyPage, bool forwardPage = true, isSlide = false}) {
     animationController.stop();
     animationController.reset();
+    statusBarColor = HexColor(storyPage?.backgroundColor ?? '#000000');
     int storyStringLength = 0;
     storyPage?.texts.forEach((element) {
       storyStringLength += element.text.length;
@@ -135,4 +139,8 @@ class StoriesProvider with ChangeNotifier {
   //     }
   //   }
   // }
+  setColor(Color color) {
+    statusBarColor = color;
+    notifyListeners();
+  }
 }

@@ -25,7 +25,7 @@ class AnimatedBar extends StatelessWidget {
                 _buildContainer(
                   double.infinity,
                   position < currentIndex
-                      ? HexColor('#8b0000')
+                      ? HexColor('#b11226')
                       : Colors.grey.withOpacity(0.5),
                 ),
                 position == currentIndex
@@ -34,7 +34,7 @@ class AnimatedBar extends StatelessWidget {
                         builder: (context, child) {
                           return _buildContainer(
                               constraints.maxWidth * animController.value,
-                              HexColor('#8b0000'));
+                              HexColor('#b11226'));
                         },
                       )
                     : const SizedBox.shrink(),

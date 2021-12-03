@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:short_term_assignment/common/models/page.dart';
+import 'package:short_term_assignment/common/theme/color.dart';
 import 'package:short_term_assignment/modules/stories/stories_provider.dart';
 import 'package:short_term_assignment/modules/stories/ui/widgets/animated_bar.dart';
+import 'package:short_term_assignment/modules/stories/ui/widgets/coloured_safe_area.dart';
 import 'package:short_term_assignment/modules/stories/ui/widgets/story_page_view.dart';
 
 class StoriesUI extends StatefulWidget {
@@ -17,13 +20,23 @@ class _StoriesUIState extends State<StoriesUI> with TickerProviderStateMixin {
   @override
   void initState() {
     context.read<StoriesProvider>().initializeAnimation(this);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     context.read<StoriesProvider>().setContext(context);
-    return SafeArea(
+    return ColoredSafeArea(
+      color:
+          context.select((StoriesProvider provider) => provider.statusBarColor),
       child: Material(
           child: GestureDetector(
         onLongPress: () {
@@ -52,7 +65,7 @@ class _StoriesUIState extends State<StoriesUI> with TickerProviderStateMixin {
                                   provider.story?.pages)![index]);
                     })),
             Positioned(
-                top: 20.0,
+                top: 40.0,
                 left: 10.0,
                 right: 10.0,
                 child: Column(children: <Widget>[
