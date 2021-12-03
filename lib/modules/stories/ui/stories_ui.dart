@@ -20,12 +20,6 @@ class _StoriesUIState extends State<StoriesUI> with TickerProviderStateMixin {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   context.read<StoriesProvider>().disposeControllers();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     context.read<StoriesProvider>().setContext(context);
@@ -35,11 +29,11 @@ class _StoriesUIState extends State<StoriesUI> with TickerProviderStateMixin {
         onLongPress: () {
           context.read<StoriesProvider>().longPressOnStory();
         },
-        onLongPressEnd: (LongPressEndDetails endDetails) {
+        onLongPressUp: () {
           context.read<StoriesProvider>().longPressOnStoryEnd();
         },
-        onTapDown: (details) =>
-            context.read<StoriesProvider>().onTapDown(context, details),
+        onTapUp: (details) =>
+            context.read<StoriesProvider>().onTapUp(context, details),
         child: Stack(
           children: [
             PageView.builder(

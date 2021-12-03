@@ -15,7 +15,7 @@ class StoryCard extends StatelessWidget {
         Navigator.pushNamed(context, '/stories', arguments: story);
       },
       child: Container(
-        width: 140,
+        width: 150,
         margin: EdgeInsets.only(right: 18),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -27,24 +27,27 @@ class StoryCard extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Image.network(story.cornerImageUrl),
             ),
-            Center(
-              child: SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: Image.network(
-                    story.iconUrl,
-                  )),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child: Text(story.name,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.roboto(
-                        textStyle: TextStyle(color: Colors.black87))),
-              ),
-            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Image.network(
+                        story.iconUrl,
+                      )),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(story.name,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.roboto(
+                          textStyle: TextStyle(color: Colors.black87))),
+                ),
+              ],
+            )
           ],
         ),
       ),

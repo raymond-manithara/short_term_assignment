@@ -76,25 +76,26 @@ class StoriesProvider with ChangeNotifier {
     }
   }
 
-  void onTapDown(BuildContext context, TapDownDetails details) {
+  void onTapUp(BuildContext context, TapUpDetails details) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double dx = details.globalPosition.dx;
     if (dx < screenWidth / 3) {
       if (activePage - 1 >= 0) {
         activePage -= 1;
-        renderStory(storyPage: story?.pages[activePage], isSlide: true);
+        renderStory(storyPage: story?.pages[activePage]);
       }
       print("Tap backward");
     } else if (dx > 2 * screenWidth / 3) {
       var length = story?.pages.length ?? 0;
       if (activePage + 1 < length) {
         activePage += 1;
-        renderStory(storyPage: story?.pages[activePage], isSlide: true);
+        renderStory(storyPage: story?.pages[activePage]);
       } else {
         Navigator.of(context, rootNavigator: true).pop();
       }
       print("Tap forward");
     }
+
     notifyListeners();
   }
 
@@ -116,4 +117,21 @@ class StoriesProvider with ChangeNotifier {
     animationController.forward();
     notifyListeners();
   }
+
+  // horizontalDragOnStory(DragEndDetails details) {
+  //   if (details.primaryVelocity! < 0) {
+  //     var length = story?.pages.length ?? 0;
+  //     if (activePage + 1 < length) {
+  //       activePage += 1;
+  //       renderStory(storyPage: story?.pages[activePage], isSlide: true);
+  //     } else {
+  //       Navigator.of(context, rootNavigator: true).pop();
+  //     }
+  //   } else {
+  //     if (activePage - 1 >= 0) {
+  //       activePage -= 1;
+  //       renderStory(storyPage: story?.pages[activePage], isSlide: true);
+  //     }
+  //   }
+  // }
 }
