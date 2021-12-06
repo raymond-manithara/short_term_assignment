@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +37,7 @@ class StoriesProvider with ChangeNotifier {
         } else {
           // activePage = 0;
           // renderStory(storyPage: story?.pages[activePage]);
-          Navigator.pop(context);
+          returnToHomeScreen();
         }
         notifyListeners();
       }
@@ -81,7 +79,7 @@ class StoriesProvider with ChangeNotifier {
     }
   }
 
-  void onTapUp(BuildContext context, TapUpDetails details) {
+  void onTapUp(TapUpDetails details) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double dx = details.globalPosition.dx;
     if (dx < screenWidth / 3) {
@@ -96,7 +94,8 @@ class StoriesProvider with ChangeNotifier {
         activePage += 1;
         renderStory(storyPage: story?.pages[activePage]);
       } else {
-        Navigator.of(context, rootNavigator: true).pop();
+        notifyListeners();
+        returnToHomeScreen();
       }
       print("Tap forward");
     }
@@ -105,8 +104,8 @@ class StoriesProvider with ChangeNotifier {
   }
 
   disposeControllers() {
-    animationController.dispose();
     pageController.dispose();
+    animationController.dispose();
   }
 
   setContext(BuildContext _context) {
@@ -142,5 +141,10 @@ class StoriesProvider with ChangeNotifier {
   setColor(Color color) {
     statusBarColor = color;
     notifyListeners();
+  }
+
+  returnToHomeScreen() {
+    disposeControllers();
+    Navigator.of(context).pop();
   }
 }
